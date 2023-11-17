@@ -29,8 +29,8 @@ app.get('/update/:id', (req, res) => {
 
     db.query(sql, [id], (err, data) => {
         if (err) return res.json("Error");
-        if (data.length === 0) return res.json("User not found"); // Handle the case where no user is found
-        return res.json(data[0]); // Return the first user (assuming there is only one user with the given ID)
+        if (data.length === 0) return res.json("User not found"); 
+        return res.json(data[0]); 
     });
 });
 
