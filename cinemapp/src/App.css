@@ -1,0 +1,217 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: goldenrod;
+  background-color: black;
+  z-index: 1000; /* Add a higher z-index to ensure it's above other elements */
+}
+
+.logo img {
+  max-height: 50px; /* Adjust the maximum height of your logo */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px; /* Adjust the margin between navigation links */
+}
+
+nav a, nav a:visited {
+  text-decoration: none;
+  color: goldenrod;
+}
+nav a:hover{
+  color: white;
+}
+.App {
+  text-align: center;
+  background-color: black;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+#register-h1{
+  font-size: large;
+  color: goldenrod;
+}
+
+#register-label{
+  color: goldenrod;
+}
+
+.screening-modal {
+  position: fixed;
+  width: auto;
+  background-color: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.screening-modal.visible {
+  display: flex;
+}
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.modal-table{
+  margin: 10px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+body td, body button{
+  font-size: medium;
+  font-weight: 600;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+input{
+  background-color: lightyellow;
+}
+
+body button {
+  background-color: goldenrod;
+  border-radius: 5px;
+}
+body th {
+  font-size:large;
+  text-align: left;
+  padding: 5px;
+  background-color: #ebc358;
+
+}
+
+.register-user, .register-user:visited , label{
+  color: goldenrod;
+}
+
+.register-user:hover {
+  color: white;
+}
+
+#login-title {
+  color: goldenrod;
+}
+
+body h2{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* App.css or another CSS file */
+.gallery-container {
+  /* Styles for the entire gallery container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+}
+
+.movie-container {
+  border-radius: 15px;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #ebc358;
+  padding:15px;
+}
+
+@media only screen and (max-width: 600px) {
+  .movie-container{
+    width: auto;
+  }
+}
+
+.movie-item {
+  margin: 10px; /* Add margin for spacing between movie items */
+  padding: 10px; /* Add padding for a cleaner look */
+  border: 1px solid #ddd; /* Add a border for better visibility */
+  box-sizing: border-box; /* Include padding and border in the box sizing */
+}
+
+
+.movie {
+  background-color: white;
+  border-radius: 15px;
+  min-width: 300px;
+  width: 30%; 
+  margin: 10px;
+  padding: 10px;
+  border: 3px solid black;
+  text-align: center;
+}
+
+.movie img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.details h4{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.details p{
+  font-size: 15px;
+  color: black;
+}
+
+.movie-option {
+  font-size: small;
+}
+
+.select-genre {
+  color: goldenrod;
+  font-size: smaller;
+  padding: 10px;
+}
+
+#genre {
+  font-size: small;
+  margin-bottom:10px;
+}
