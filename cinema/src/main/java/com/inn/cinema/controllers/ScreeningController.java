@@ -46,6 +46,7 @@ public class ScreeningController {
         Screening s = screeningRepository.findById(id).get();
         s.setMovie(screening.getMovie());
         s.setAuditorium(screening.getAuditorium());
+        s.setDate(screening.getDate());
         // Add more if needed for other properties
         return screeningRepository.save(s);
     }

@@ -57,7 +57,6 @@ const Gallery = () => {
 
   const handleSeeScreenings = async (id) => {
     try {
-      console.log(id)
       const response = await axios.get(`http://localhost:8080/screenings/by-movie/${id}`);
       setScreenings(response.data);
 

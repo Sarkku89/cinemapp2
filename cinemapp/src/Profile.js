@@ -12,8 +12,8 @@ const Profile = ({ onUpdateEmail, onCancelTicket }) => {
   useEffect(() => {
     const fetchUserTickets = async () => {
         try {
-            if (user && user.user_id) {
-                const response = await axios.get(`http://localhost:8081/user-tickets/${user.user_id}`);
+            if (user && user.id) {
+                const response = await axios.get(`http://localhost:8080/bookings/by-user/${user.id}`);
                 console.log('User Tickets from API:', response.data);
                 setUserTickets(response.data);
             }
@@ -54,9 +54,9 @@ const Profile = ({ onUpdateEmail, onCancelTicket }) => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log('User, User ID, and User Tickets before renderings:', user, user && user.user_id, userTickets);
+  console.log('User, User ID, and User Tickets before renderings:', user, user && user.id, userTickets);
 
-  if (!user || !user.user_id) {
+  if (!user || !user.id) {
     // Redirect to another page or display an error message
     return <div>User not found</div>;
   }
@@ -85,10 +85,10 @@ const Profile = ({ onUpdateEmail, onCancelTicket }) => {
         </thead>
         <tbody>
           {userTickets.map((ticket) => (
-            <tr key={ticket.booking_id}>
-              <td>{ticket.movieTitle}</td>
-              <td>{ticket.date}</td>
-              <td>{ticket.auditorium}</td>
+            <tr key={ticket.id}>
+              <td>{ticket.screening.movie.title}</td>
+              <td>{ticket.screening.date}</td>
+              <td>{ticket.screening.auditorium.name}</td>
               <td>
                 <button className='cancel-ticket' onClick={() => handleCancel(ticket.id)}>
                   Cancel

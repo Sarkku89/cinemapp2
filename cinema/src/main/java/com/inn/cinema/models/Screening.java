@@ -15,6 +15,9 @@ public class Screening {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int screening_id;
 
+    private String date;
+    private int bookedSeats; // Uusi kenttä varattujen paikkojen määrälle
+    
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
@@ -26,8 +29,6 @@ public class Screening {
     @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
     private List<Booking> bookings;
     
-    private int bookedSeats; // Uusi kenttä varattujen paikkojen määrälle
-
     // Constructors, getters, setters, other properties if needed
 
     public int getId() {
@@ -36,6 +37,14 @@ public class Screening {
 
     public void setId(int screening_id) {
         this.screening_id = screening_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Movie getMovie() {
@@ -64,6 +73,6 @@ public class Screening {
 
     @Override
     public String toString() {
-        return "Screening [id=" + screening_id + ", movie=" + movie + ", auditorium=" + auditorium + "]";
+        return "Screening [id=" + screening_id + ", movie=" + movie + ", auditorium=" + auditorium + ", date=" + date + "]";
     }
 }

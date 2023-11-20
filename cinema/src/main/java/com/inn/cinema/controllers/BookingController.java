@@ -30,6 +30,11 @@ public class BookingController {
         return bookingRepository.findById(id).orElse(null);
     }
 
+    @GetMapping(value = "/bookings/by-user/{userId}")
+        public List<Booking> getByUserId(@PathVariable(name = "userId") Integer userId) {
+            return bookingRepository.findByUserId(userId);
+    }
+
     @PostMapping(value = "/bookings")
     public ResponseEntity<?> create(@RequestBody Booking booking) {
         // Haetaan screening, johon varaus liittyy
