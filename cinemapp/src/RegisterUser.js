@@ -66,7 +66,7 @@ const RegisterUser = () => {
 
     /*function handleSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:8081/register', { name, email, pwd })
+        axios.post('http://localhost:8081/register', { name, email, password: pwd })
             .then(res => {
                 console.log(res)
             }).catch(err => console.log(err));
@@ -155,7 +155,7 @@ const RegisterUser = () => {
                     <p>Already registered?<br />
                         <span className="line">
                             {/*put router link here*/}
-                            <a href="#" className="register-user">Sign In</a>
+                            <a href="/login" className="register-user">Sign In</a>
                         </span>
                     </p>
                 </section>
