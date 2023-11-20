@@ -34,16 +34,16 @@ const Gallery = () => {
       return;
     }
 
-    if (!screening || !screening.screening_id) {
+    if (!screening || !screening.id) {
       console.error('Invalid screening object or screening_id is not defined');
       return;
     }
 
-    const userId = user.user_id;
-    const screeningId = screening.screening_id;
+    const userId = user.id;
+    const screeningId = screening.id;
 
     // Send a request to book tickets
-    axios.post('http://localhost:8081/bookings', { user: userId, screening: screeningId })
+    axios.post('http://localhost:8080/bookings', { "user": {"id": userId}, "screening": {"id": screeningId} })
       .then(response => {
         // Handle the response as needed
         console.log(response.data);

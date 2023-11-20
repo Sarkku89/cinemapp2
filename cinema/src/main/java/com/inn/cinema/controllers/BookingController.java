@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.inn.cinema.models.Booking;
-import com.inn.cinema.models.Screening;
+/*import com.inn.cinema.models.Movie;
+import com.inn.cinema.models.Screening;*/
 import com.inn.cinema.repositories.BookingRepository;
-import com.inn.cinema.repositories.ScreeningRepository;
+//import com.inn.cinema.repositories.ScreeningRepository;
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class BookingController {
     @Autowired
     private BookingRepository bookingRepository;
 
-    @Autowired
-    private ScreeningRepository screeningRepository;
+    /*@Autowired
+    private ScreeningRepository screeningRepository;*/
 
     @GetMapping(value = "/bookings")
     public List<Booking> getAll() {
@@ -35,7 +36,7 @@ public class BookingController {
             return bookingRepository.findByUserId(userId);
     }
 
-    @PostMapping(value = "/bookings")
+    /*@PostMapping(value = "/bookings")
     public ResponseEntity<?> create(@RequestBody Booking booking) {
         // Haetaan screening, johon varaus liittyy
         Screening screening = booking.getScreening();
@@ -59,6 +60,11 @@ public class BookingController {
             // Näytön tai sen auditoriumin tiedot puuttuvat
             return ResponseEntity.badRequest().body("Error: Missing screening or auditorium information");
         }
+    }*/
+
+    @PostMapping(value = "/bookings")
+    public Booking create(@RequestBody Booking booking) {
+        return bookingRepository.save(booking);
     }
 
     @PutMapping(value = "/bookings/{id}")

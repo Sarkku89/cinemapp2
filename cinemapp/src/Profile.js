@@ -42,7 +42,7 @@ const Profile = ({ onUpdateEmail, onCancelTicket }) => {
 
   const handleCancel = async (ticketId) => {
     try {
-      await axios.delete(`http://localhost:8081/cancel-ticket/${ticketId}`);
+      await axios.delete(`http://localhost:8080/bookings/${ticketId}`);
       onCancelTicket(ticketId);
       setUserTickets((prevTickets) => prevTickets.filter((ticket) => ticket.id !== ticketId));
       console.log('Ticket canceled successfully!');
