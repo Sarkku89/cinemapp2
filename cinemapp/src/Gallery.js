@@ -16,7 +16,7 @@ const Gallery = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/');
+      const response = await axios.get('http://localhost:8080/movies');     
       setMovies(response.data);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -29,23 +29,31 @@ const Gallery = () => {
     // You can add more logic here, like redirecting to a booking page or showing a confirmation message
   };
 
-  const fetchScreenings = async (movieId) => {
+  /*const fetchScreenings = async (movieId) => {
     try {
-      const response = await axios.get(`http://localhost:8081/screenings/${movieId}`);
+      const response = await axios.get(`http://localhost:8080/screenings/${movieId}`);
       console.log('Fetched screenings:', response.data);
       setScreenings(response.data);
     } catch (error) {
       console.error('Error fetching screenings:', error);
     }
-  };
+  };*/
 
-  const handleSeeScreenings = async (movieId) => {
+  const handleSeeScreenings = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8081/screenings/${movieId}`);
+      console.log(id)
+      const response = await axios.get(`http://localhost:8080/screenings/by-movie/${id}`);
       setScreenings(response.data);
-      setSelectedMovieId(movieId);
-      setSelectedScreening(response.data[0]); // Set the selected screening to the first one in the response data
-      setIsModalOpen(true);
+
+      // Update the selected screening state based on the clicked screening
+      setSelectedScreening(null); // Reset to null initially
+
+      // Open the modal only if there are screenings
+      if (response.data.length > 0) {
+        setSelectedScreening(response.data[0]); // For now, selecting the first screening
+        setSelectedMovieId(id);
+        setIsModalOpen(true);
+      }
     } catch (error) {
       console.error('Error fetching screenings:', error);
     }

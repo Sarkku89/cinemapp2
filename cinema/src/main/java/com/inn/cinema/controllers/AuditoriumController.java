@@ -10,7 +10,7 @@ import com.inn.cinema.repositories.AuditoriumRepository;
 import java.util.*;
 
 @RestController
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuditoriumController {
 
     @Autowired

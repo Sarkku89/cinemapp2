@@ -11,11 +11,11 @@ public class Booking {
     private int booking_id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id") // Name of the column in the Booking table referring to the user
+    @JoinColumn(name = "user_id") 
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "screening_id") // Name of the column in the Booking table referring to the screening
+    @JoinColumn(name = "screening_id")
     private Screening screening;
 
     // Constructors, getters, setters, other properties if needed
@@ -32,16 +32,18 @@ public class Booking {
         return user;
     }
 
-    public void setUser(User user_id) {
-        this.user = user_id;
+    public void setUser(User user) {
+        this.user = user;
+        // Make sure to update the inverse side as well
+       // user.getTickets().add(this);
     }
 
     public Screening getScreening() {
         return screening;
     }
 
-    public void setScreening(Screening screening_id) {
-        this.screening = screening_id;
+    public void setScreening(Screening screening) {
+        this.screening = screening;
     }
 
     @Override

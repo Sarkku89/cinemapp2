@@ -10,7 +10,7 @@ import com.inn.cinema.repositories.MovieRepository;
 import java.util.*;
 
 @RestController
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class MovieController {
 
     @Autowired

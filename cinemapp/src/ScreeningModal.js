@@ -14,15 +14,17 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
               <thead>
                 <tr>
                   <th>Time</th>
-                  <th>Auditorium</th>
+                  <th>Auditorium name</th>
+                  <th>Auditorium size</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {screenings.map(screening => (
-                  <tr key={screening.screening_id}>
+                  <tr key={screening.id}>
                     <td>{screening.date}</td>
-                    <td>{screening.auditorium}</td>
+                    <td>{screening.auditorium.name}</td>
+                    <td>{screening.auditorium.size}</td>
                     <td>
                       <button onClick={() => onBookTickets(screening)}>
                         Book Tickets

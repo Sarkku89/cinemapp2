@@ -1,11 +1,12 @@
 import { useRef, useState, useEffect } from "react";
-import axios from 'axios';
+//import axios from 'axios';
+import { createUser } from './api/axios';
 
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-const REGISTER_URL = 'http://localhost:8081/register';
+//const REGISTER_URL = 'http://localhost:3000/register';
 
 const RegisterUser = () => {
     const nameRef = useRef();
@@ -63,14 +64,33 @@ const RegisterUser = () => {
     }, [name, pwd, matchPwd])
 
 
-    function handleSubmit(event) {
+    /*function handleSubmit(event) {
         event.preventDefault();
         axios.post('http://localhost:8081/register', { name, email, pwd })
             .then(res => {
                 console.log(res)
             }).catch(err => console.log(err));
             setSuccess(true);
-    }
+    }*/
+
+    const handleSubmit = async (event) => {       
+        try {
+            event.preventDefault();
+            const newUser = {
+                "name": name, 
+                "email": email,
+                "password": pwd
+            }//{ name: name, email: email, password: pwd };
+            await createUser(newUser);
+            // Fetch updated user list after creation
+            //const response = await getAllUsers();
+            //setUsers(response.data);
+            setSuccess(true)
+        } catch (error) {
+            console.error('Error creating user:', error);
+        }
+    };
+
     return (
         <>
             {success ? (

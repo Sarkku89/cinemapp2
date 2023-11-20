@@ -11,6 +11,7 @@ import com.inn.cinema.repositories.ScreeningRepository;
 import java.util.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ScreeningController {
 
     @Autowired
@@ -24,6 +25,11 @@ public class ScreeningController {
     @GetMapping(value = "/screenings/{id}")
     public Screening get(@PathVariable(name = "id") Integer id) {
         return screeningRepository.findById(id).get();
+    }
+
+    @GetMapping(value = "/screenings/by-movie/{movieId}")
+        public List<Screening> getByMovieId(@PathVariable(name = "movieId") Integer movieId) {
+            return screeningRepository.findByMovieId(movieId);
     }
     
     @PostMapping(value = "/screenings")

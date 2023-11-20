@@ -11,7 +11,7 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8081/login', { email, password });
+      const response = await axios.post('http://localhost:8080/login', { email, password });
       const user = response.data;
       onLogin(user);
       setError(null);

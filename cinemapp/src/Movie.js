@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-const Movie = ({ movie_id, title, duration, genre, language, imgurl, onSeeScreenings }) => {
+const Movie = ({ id, title, duration, genre, language, imgurl, onSeeScreenings }) => {
 
-  const handleSeeScreenings = (movie_id, event) => {
+  const handleSeeScreenings = (id, event) => {
+    console.log(id)
     event.preventDefault();
-    onSeeScreenings(movie_id);
+    onSeeScreenings(id);
 
   };
 
@@ -16,7 +17,7 @@ const Movie = ({ movie_id, title, duration, genre, language, imgurl, onSeeScreen
         <p>Duration: {duration} mins <br />
           Genre: {genre}<br />
           Language: {language}<br />
-          <button onClick={(e) => handleSeeScreenings(movie_id, e)}>See Screenings</button>
+          <button onClick={(e) => handleSeeScreenings(id, e)}>See Screenings</button>
         </p>
       </div>
     </div>
