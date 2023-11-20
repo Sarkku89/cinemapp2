@@ -1,12 +1,25 @@
 import React from 'react';
+import { useUserContext } from './UserContext';
 
 const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets }) => {
-  const modalClassName = screenings.length > 0 ? 'screening-modal visible' : 'screening-modal';
+    const modalClassName = screenings.length > 0 ? 'screening-modal visible' : 'screening-modal';
+    const user = useUserContext();
+  
+    const handleBookTickets = () => {
+      if (!user || !selectedScreening) {
+        console.error('User ID or screening not available');
+        return;
+      }
+  
+      // Pass the entire screening object to onBookTickets
+      onBookTickets(selectedScreening);
+    };
+  
+    return (
 
-  return (
-    <div className={modalClassName}>
-      <div className="modal-content">
-        <h2>Screenings</h2>
+      <div className={modalClassName}>
+        <div className="modal-content">
+          <h2>Screenings</h2>
 
         {screenings.length > 0 ? (
           <div className="screening-details">
@@ -47,5 +60,6 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
     </div>
   );
 };
+
 
 export default ScreeningModal;

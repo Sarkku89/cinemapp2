@@ -6,7 +6,9 @@ import UpdateUser from './UpdateUser';
 import RegisterUser from './RegisterUser';
 import Gallery from './Gallery';
 import Login from './LogIn';
+import Profile from './Profile';
 import { useState } from 'react';
+import UserContext from './UserContext';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,45 +35,38 @@ function App() {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/screenings">Screenings</Link>
-              </li>
-              {user ? (
-                // Show My tickets link when user is logged in
+              {user && (
                 <li>
-                  <Link to="/mytickets">
-                    My tickets
-                  </Link>
+                  {/* Show Profile link only when user is logged in */}
+                  <Link to="/profile">Profile</Link>
                 </li>
-              ) : (
-                <li></li>
               )}
 
               <li>
                 {user ? (
-                  // Show logout link when user is logged in
                   <Link to="/" onClick={handleLogout}>
                     Logout
                   </Link>
                 ) : (
-                  // Show login link when user is not logged in
                   <Link to="/login">Log In</Link>
                 )}
               </li>
               <li>
-                {/* Show register link when user is not logged in */}
                 {!user && <Link to="/register">Register</Link>}
               </li>
             </ul>
           </nav>
         </header>
+        <UserContext.Provider value={{user}} >
         <Routes>
           <Route path="/" element={<Gallery />} />
           <Route path="/create" element={<CreateUser />} />
           <Route path="/update/:id" element={<UpdateUser />} />
           <Route path="/register" element={<RegisterUser />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
         </Routes>
+        </UserContext.Provider>
       </BrowserRouter>
     </div>
   );

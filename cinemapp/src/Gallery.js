@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Movie from './Movie';
 import ScreeningModal from './ScreeningModal';
+import { useUserContext } from './UserContext';
 
 const Gallery = () => {
   const [movies, setMovies] = useState([]);
   const [screenings, setScreenings] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [selectedScreening, setSelectedScreening] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // New state to track modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Move the useUserContext hook here
+  const user = useUserContext();
+  console.log('User:', user);
 
   useEffect(() => {
     fetchMovies();
@@ -23,21 +28,32 @@ const Gallery = () => {
     }
   };
 
-  const handleBookTickets = (selectedScreening) => {
-    console.log('handleBookTickets in Gallery.js called for screening:', selectedScreening);
-    // Implement the logic to handle booking tickets
-    // You can add more logic here, like redirecting to a booking page or showing a confirmation message
+  const handleBookTickets = (screening) => {
+    if (!user) {
+      console.error('User ID not available');
+      return;
+    }
+
+    if (!screening || !screening.screening_id) {
+      console.error('Invalid screening object or screening_id is not defined');
+      return;
+    }
+
+    const userId = user.user_id;
+    const screeningId = screening.screening_id;
+
+    // Send a request to book tickets
+    axios.post('http://localhost:8081/bookings', { user: userId, screening: screeningId })
+      .then(response => {
+        // Handle the response as needed
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error booking tickets:', error);
+        // Handle errors appropriately
+      });
   };
 
-  /*const fetchScreenings = async (movieId) => {
-    try {
-      const response = await axios.get(`http://localhost:8080/screenings/${movieId}`);
-      console.log('Fetched screenings:', response.data);
-      setScreenings(response.data);
-    } catch (error) {
-      console.error('Error fetching screenings:', error);
-    }
-  };*/
 
   const handleSeeScreenings = async (id) => {
     try {
@@ -59,6 +75,7 @@ const Gallery = () => {
     }
   };
 
+
   const handleCloseModal = () => {
     setSelectedMovieId(null);
     setScreenings([]);
@@ -75,7 +92,7 @@ const Gallery = () => {
         ))}
       </div>
 
-      {/* Screening modal */}
+
       {isModalOpen && (
         <ScreeningModal
           screenings={screenings}
