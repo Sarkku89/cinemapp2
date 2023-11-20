@@ -4,6 +4,8 @@ import { useUserContext } from './UserContext';
 const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets }) => {
     const modalClassName = screenings.length > 0 ? 'screening-modal visible' : 'screening-modal';
     const user = useUserContext();
+    console.log('User from UserContextSM:', user);
+
   
     const handleBookTickets = () => {
       if (!user || !selectedScreening) {

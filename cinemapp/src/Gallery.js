@@ -11,9 +11,8 @@ const Gallery = () => {
   const [selectedScreening, setSelectedScreening] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Move the useUserContext hook here
   const user = useUserContext();
-  console.log('User:', user);
+  console.log('User from UserContextG:', user);
 
   useEffect(() => {
     fetchMovies();
@@ -29,6 +28,7 @@ const Gallery = () => {
   };
 
   const handleBookTickets = (screening) => {
+    console.log('User before booking:', user);
     if (!user) {
       console.error('User ID not available');
       return;
@@ -40,6 +40,7 @@ const Gallery = () => {
     }
 
     const userId = user.user_id;
+    console.log(userId);
     const screeningId = screening.screening_id;
 
     // Send a request to book tickets
@@ -58,21 +59,27 @@ const Gallery = () => {
   const handleSeeScreenings = async (movieId) => {
     try {
       const response = await axios.get(`http://localhost:8081/screenings/${movieId}`);
-      setScreenings(response.data);
-
-      // Update the selected screening state based on the clicked screening
-      setSelectedScreening(null); // Reset to null initially
-
-      // Open the modal only if there are screenings
-      if (response.data.length > 0) {
-        setSelectedScreening(response.data[0]); // For now, selecting the first screening
-        setSelectedMovieId(movieId);
-        setIsModalOpen(true);
-      }
+      
+      // Use the callback function of setScreenings
+      setScreenings(prevScreenings => {
+        // Update the selected screening state based on the clicked screening
+        setSelectedScreening(null); // Reset to null initially
+  
+        // Open the modal only if there are screenings
+        if (response.data.length > 0) {
+          setSelectedScreening(response.data[0]); // For now, selecting the first screening
+          setSelectedMovieId(movieId);
+          setIsModalOpen(true);
+        }
+  
+        // Update the state with the new data
+        return response.data;
+      });
     } catch (error) {
       console.error('Error fetching screenings:', error);
     }
   };
+
 
 
   const handleCloseModal = () => {
