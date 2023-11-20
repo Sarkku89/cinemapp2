@@ -215,3 +215,19 @@ body h2{
   font-size: small;
   margin-bottom:10px;
 }
+
+.tickets-table{
+  width: 100%;
+}
+
+.tickets-table th{
+  padding: 10px 20px 10px 20px;
+}
+
+.update-email{
+  width: 150px;
+}
+
+#h2-profile{
+  color: goldenrod;
+}
