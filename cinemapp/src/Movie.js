@@ -3,10 +3,8 @@ import React, { useState } from 'react';
 const Movie = ({ id, title, duration, genre, language, imgurl, onSeeScreenings }) => {
 
   const handleSeeScreenings = (id, event) => {
-    console.log(id)
     event.preventDefault();
     onSeeScreenings(id);
-
   };
 
   return (
