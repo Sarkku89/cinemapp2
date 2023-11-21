@@ -14,6 +14,7 @@ public class Movie {
     private int duration;
     private String genre;
     private String language;
+    private String imgurl;
     public Movie() {
         super();
     }
@@ -21,7 +22,7 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Screening> screenings;
 
-    public Movie(int movie_id, String title, int duration, String genre, String language) {
+    public Movie(int movie_id, String title, int duration, String genre, String language, String imgurl) {
 
         super();
 
@@ -34,6 +35,8 @@ public class Movie {
         this.genre = genre;
 
         this.language = language;
+
+        this.imgurl = imgurl;
 
     }
 
@@ -97,10 +100,22 @@ public class Movie {
 
     }
 
+     public String getImgurl() {
+
+        return imgurl;
+
+    }
+
+    public void setImgurl(String imgurl) {
+    
+    this.imgurl = imgurl;
+
+    }
+
     @Override
     public String toString() {
 
-        return "Movie [id=" + movie_id + ", title=" + title + ", duration=" + duration + ", genre=" + genre + ", language=" + "]";
+        return "Movie [id=" + movie_id + ", title=" + title + ", duration=" + duration + ", genre=" + genre + ", language=" + language + ", imgurl=" + imgurl +"]";
 
     }
 
