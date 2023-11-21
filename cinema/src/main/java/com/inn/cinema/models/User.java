@@ -1,6 +1,6 @@
 package com.inn.cinema.models;
 
-//import java.util.List;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -14,13 +14,13 @@ public class User {
     private String name;
     private String email;
     private String password;
-    
-   // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-   // private List<Booking> tickets;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+        private List<Booking> bookings;
+    
     public User() {
         super();
-    }
+    }  
 
     public User(int user_id, String name, String email, String password) {
 
@@ -83,10 +83,6 @@ public class User {
         this.password = password;
 
     }
-
-    /*public List<Booking> getTickets() {
-        return tickets;
-    }*/
 
     @Override
     public String toString() {

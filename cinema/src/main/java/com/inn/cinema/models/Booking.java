@@ -34,8 +34,6 @@ public class Booking {
 
     public void setUser(User user) {
         this.user = user;
-        // Make sure to update the inverse side as well
-       // user.getTickets().add(this);
     }
 
     public Screening getScreening() {

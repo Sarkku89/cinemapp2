@@ -16,7 +16,7 @@ public class Screening {
     private int screening_id;
 
     private String date;
-    //private int bookedSeats; // Uusi kenttä varattujen paikkojen määrälle
+    //private int bookedSeats;
     
     @ManyToOne
     @JoinColumn(name = "movie_id")
@@ -63,13 +63,13 @@ public class Screening {
         this.auditorium = auditorium_id;
     }
     
-    //public int getBookedSeats() {
-      //  return bookedSeats;
-    //}
+    /*public int getBookedSeats() {
+        return bookedSeats;
+    }
 
-    //public void setBookedSeats(int bookedSeats) {
-        //this.bookedSeats = bookedSeats;
-    //}
+    public void setBookedSeats(int bookedSeats) {
+        this.bookedSeats = bookedSeats;
+    }*/
 
     @Override
     public String toString() {

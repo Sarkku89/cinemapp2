@@ -79,7 +79,7 @@ const RegisterUser = () => {
                 "name": name, 
                 "email": email,
                 "password": pwd
-            }//{ name: name, email: email, password: pwd };
+            }
             await createUser(newUser);
             // Fetch updated user list after creation
             //const response = await getAllUsers();

@@ -40,11 +40,10 @@ const Gallery = () => {
     }
 
     const userId = user.user.id;
-    console.log(userId);
     const screeningId = screening.id;
 
     // Send a request to book tickets
-    axios.post('http://localhost:8080/bookings', { user: userId, screening: screeningId })
+    axios.post('http://localhost:8080/bookings', { "user": {"id": userId}, "screening": {"id": screeningId} })
       .then(response => {
         // Handle the response as needed
         console.log(response.data);

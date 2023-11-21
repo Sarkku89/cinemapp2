@@ -39,7 +39,7 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
                     <td>{screening.auditorium.name}</td>
                     <td>{screening.auditorium.size}</td>
                     <td>
-                      <button onClick={() => onBookTickets(screening)}>
+                      <button onClick={() => handleBookTickets(screening)}>
                         Book Tickets
                       </button>
                     </td>
