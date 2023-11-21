@@ -20,6 +20,9 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
       <div className={modalClassName}>
         <div className="modal-content">
           <h2>Screenings</h2>
+          {!user.user && (
+            <p>Log in to book tickets.</p>
+          )}
 
         {screenings.length > 0 ? (
           <div className="screening-details">
@@ -39,9 +42,11 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
                     <td>{screening.auditorium.name}</td>
                     <td>{screening.auditorium.size}</td>
                     <td>
-                      <button onClick={() => handleBookTickets(screening)}>
-                        Book Tickets
-                      </button>
+                      {user.user && (
+                        <button onClick={() => handleBookTickets(screening)}>
+                          Book Tickets
+                        </button>
+                      )}                     
                     </td>
                   </tr>
                 ))}
