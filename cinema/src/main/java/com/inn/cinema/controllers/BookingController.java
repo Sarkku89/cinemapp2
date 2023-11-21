@@ -35,7 +35,7 @@ public class BookingController {
             return bookingRepository.findByUserId(userId);
     }
 
-    @PostMapping(value = "/bookings")
+/*     @PostMapping(value = "/bookings")
     public ResponseEntity<?> create(@RequestBody Booking booking) {
         // Haetaan screening, johon varaus liittyy
         Screening screening = booking.getScreening();
@@ -59,6 +59,11 @@ public class BookingController {
             // Näytön tai sen auditoriumin tiedot puuttuvat
             return ResponseEntity.badRequest().body("Error: Missing screening or auditorium information");
         }
+    } */
+
+    @PostMapping(value = "/bookings")
+    public Booking create(@RequestBody Booking booking){
+        return bookingRepository.save(booking);
     }
 
     @PutMapping(value = "/bookings/{id}")
