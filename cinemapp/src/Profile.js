@@ -2,48 +2,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUserContext } from './UserContext';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
-const Profile = ({ onUpdateEmail, onCancelTicket }) => {
+const Profile = () => {
   const { user } = useUserContext();
-  const [newEmail, setNewEmail] = useState('');
   const [userTickets, setUserTickets] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserTickets = async () => {
-        try {
-            if (user && user.id) {
-                const response = await axios.get(`http://localhost:8080/bookings/by-user/${user.id}`);
-                console.log('User Tickets from API:', response.data);
-                setUserTickets(response.data);
-            }
-            setLoading(false);
-        } catch (error) {
-            console.error('Error fetching user tickets:', error);
-            setLoading(false);
+      try {
+        if (user && user.id) {
+          const response = await axios.get(`http://localhost:8080/bookings/by-user/${user.id}`);
+          console.log('User Tickets from API:', response.data);
+          setUserTickets(response.data);
         }
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching user tickets:', error);
+        setLoading(false);
+      }
     };
 
     fetchUserTickets();
-}, [user]);
-
-  const handleUpdateEmail = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios.put(`http://localhost:8081/update-email/${user.user_id}`, { newEmail });
-      onUpdateEmail(newEmail);
-      setNewEmail('');
-      console.log('Email updated successfully!');
-    } catch (error) {
-      console.error('Error updating email:', error);
-    }
-  };
+  }, [user]);
 
   const handleCancel = async (ticketId) => {
     try {
       await axios.delete(`http://localhost:8080/bookings/${ticketId}`);
-      onCancelTicket(ticketId);
       setUserTickets((prevTickets) => prevTickets.filter((ticket) => ticket.id !== ticketId));
       console.log('Ticket canceled successfully!');
     } catch (error) {
@@ -54,7 +40,6 @@ const Profile = ({ onUpdateEmail, onCancelTicket }) => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log('User, User ID, and User Tickets before renderings:', user, user && user.id, userTickets);
 
   if (!user || !user.id) {
     // Redirect to another page or display an error message
@@ -65,15 +50,14 @@ const Profile = ({ onUpdateEmail, onCancelTicket }) => {
     <div>
       <h2 id="h2-profile">Welcome, {user.name}!</h2>
       <p>Email: {user.email}</p>
-
-      <form onSubmit={handleUpdateEmail}>
-        <label>
-          Update Email:
-          <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
-        </label><button className="update-email" type="submit">Update Email</button>
-      </form>
       <br />
-        <h2 id="h2-profile">Your tickets</h2>
+      <Link to="/updateuser"> {/* Wrap the button with Link */}
+        <button className='edit-profile'>Edit profile</button>
+      </Link>
+      <br />
+      <br />
+      <br />
+      <h2 id="h2-profile">Your tickets</h2>
       <table className='tickets-table'>
         <thead>
           <tr>

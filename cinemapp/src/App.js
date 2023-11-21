@@ -1,7 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import CreateUser from './CreateUser';
 import UpdateUser from './UpdateUser';
 import RegisterUser from './RegisterUser';
 import Gallery from './Gallery';
@@ -60,8 +59,7 @@ function App() {
         <UserContext.Provider value={{user}} >
         <Routes>
           <Route path="/" element={<Gallery />} />
-          <Route path="/create" element={<CreateUser />} />
-          <Route path="/update/:id" element={<UpdateUser />} />
+          <Route path="/updateuser" element={<UpdateUser />} />
           <Route path="/register" element={<RegisterUser />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />

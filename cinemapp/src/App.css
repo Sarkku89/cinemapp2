@@ -220,8 +220,13 @@ body h2{
   width: 100%;
 }
 
+.tickets-table td{
+  color: goldenrod;
+}
+
 .tickets-table th{
   padding: 10px 20px 10px 20px;
+  text-align: left;
 }
 
 .update-email{
