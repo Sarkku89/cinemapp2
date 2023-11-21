@@ -1,5 +1,7 @@
 package com.inn.cinema.models;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,9 +15,12 @@ public class User {
     private String email;
     private String password;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+        private List<Booking> bookings;
+    
     public User() {
         super();
-    }
+    }  
 
     public User(int user_id, String name, String email, String password) {
 

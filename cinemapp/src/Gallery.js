@@ -39,7 +39,7 @@ const Gallery = () => {
       return;
     }
 
-    const userId = user.id;
+    const userId = user.user.id;
     const screeningId = screening.id;
 
     // Send a request to book tickets
