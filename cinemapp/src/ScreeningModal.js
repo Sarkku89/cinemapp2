@@ -21,7 +21,7 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
         <div className="modal-content">
           <h2>Screenings</h2>
           {!user.user && (
-            <p>Log in to book tickets.</p>
+            <p id="warning">Log in to book tickets.</p>
           )}
 
         {screenings.length > 0 ? (

@@ -22,6 +22,7 @@ export const getUserById = (userId) => {
 
 export const createUser = (userData) => {
     return axios.post(`${BASE_URL}/users`, userData);
+    
 };
 
 export const updateUser = (userId, userData) => {

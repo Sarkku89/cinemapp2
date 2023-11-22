@@ -26,19 +26,27 @@ nav li {
   margin-right: 20px; /* Adjust the margin between navigation links */
 }
 
-nav a, nav a:visited {
+a, a:visited {
   text-decoration: none;
   color: goldenrod;
 }
-nav a:hover{
+a:hover{
   color: white;
 }
+
+nav a{
+  text-decoration: none; }
+
 .App {
   text-align: center;
   background-color: black;
   font-family: 'Courier New', Courier, monospace;
 }
 
+#warning{
+  color: red;
+  font-weight: 600;
+}
 
 #register-h1{
   font-size: large;

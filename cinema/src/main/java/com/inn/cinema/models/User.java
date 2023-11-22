@@ -14,6 +14,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private Boolean admin;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
         private List<Booking> bookings;
@@ -22,7 +23,7 @@ public class User {
         super();
     }  
 
-    public User(int user_id, String name, String email, String password) {
+    public User(int user_id, String name, String email, String password, Boolean admin) {
 
         super();
 
@@ -33,6 +34,8 @@ public class User {
         this.email = email;
 
         this.password = password;
+
+        this.admin = admin;
 
     }
 
@@ -84,10 +87,22 @@ public class User {
 
     }
 
+     public Boolean getAdmin() {
+
+        return admin;
+
+    }
+
+    public void setAdmin(Boolean admin) {
+
+        this.admin = admin;
+
+    }
+
     @Override
     public String toString() {
 
-        return "User [id=" + user_id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
+        return "User [id=" + user_id + ", name=" + name + ", email=" + email + ", password=" + password + ", admin="+ admin +"]";
 
     }
 

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from './UserContext';
 
 const CreateMovie = () => {
   const [movieData, setMovieData] = useState({
@@ -9,8 +10,15 @@ const CreateMovie = () => {
     language: '',
     genre: '',
   });
+  const user = useUserContext();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user || !user.admin) {
+      navigate('/access-denied');
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +41,7 @@ const CreateMovie = () => {
 
   return (
     <div>
-      <h2>Create Movie</h2>
+      <h2 id="h2-profile">Create Movie</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Title:

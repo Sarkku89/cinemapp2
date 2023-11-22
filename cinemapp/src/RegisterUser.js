@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-import axios from 'axios';
+import { createUser } from './api/axios';
+import { Link } from "react-router-dom";
 
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -62,28 +63,36 @@ const RegisterUser = () => {
     }, [name, pwd, matchPwd])
 
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        axios.post('http://localhost:8080/users', { "name": name, "email": email, "password": pwd })
-            .then(res => {
-                console.log(res)
-                setSuccess(true);
-            }).catch(err => console.log(err));           
-    }
+    const handleSubmit = async (event) => {       
+        try {
+            event.preventDefault();
+            const newUser = {
+                "name": name, 
+                "email": email,
+                "password": pwd,
+                "admin": false
+            }
+            console.log(newUser);
+            await createUser(newUser);
+            setSuccess(true)
+        } catch (error) {
+            console.error('Error creating user:', error);
+        }
+    };
 
     return (
         <>
             {success ? (
                 <section>
-                    <h1>Success!</h1>
+                    <h2 id="h2-profile">Success!</h2>
                     <p>
-                        <a href="/login">Sign In</a>
+                    <Link to="/login" className="register-user">Log In</Link>
                     </p>
                 </section>
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "ofscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1 id="register-h1">Register name</h1>
+                    <h2 id="h2-profile">Registration</h2>
                     <form onSubmit={handleSubmit}>
 
                         <label id="register-label" htmlFor="email">Name:</label>
@@ -134,8 +143,7 @@ const RegisterUser = () => {
                     </form>
                     <p>Already registered?<br />
                         <span className="line">
-                            {/*put router link here*/}
-                            <a href="/login" className="register-user">Sign In</a>
+                            <Link to="/login" className="register-user">Log In</Link>
                         </span>
                     </p>
                 </section>

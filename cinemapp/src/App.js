@@ -9,6 +9,8 @@ import Profile from './Profile';
 import CreateMovie from './CreateMovie';
 import { useState } from 'react';
 import UserContext from './UserContext';
+import AccessDenied from './AccessDenied';
+import PleaseLogin from './PleaseLogin';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,24 +35,32 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+              <Link to="/">Home</Link>
               </li>
               {user && (
+                <>
+                  <li>
+                    {/* Show Profile link only when user is logged in */}
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                  {user.admin && (
+                    <li>
+                      {/* Show "Add movies" link only if the user is an admin */}
+                      <Link to="/create-movie">Add movies</Link>
+                    </li>
+                  )}
+                  <li>
+                    <Link to="/" onClick={handleLogout}>
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              )}
+              {!user && (
                 <li>
-                  {/* Show Profile link only when user is logged in */}
-                  <Link to="/profile">Profile</Link>
+                  <Link to="/login">Log In</Link>
                 </li>
               )}
-
-              <li>
-                {user ? (
-                  <Link to="/" onClick={handleLogout}>
-                    Logout
-                  </Link>
-                ) : (
-                  <Link to="/login">Log In</Link>
-                )}
-              </li>
               <li>
                 {!user && <Link to="/register">Register</Link>}
               </li>
@@ -65,6 +75,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/create-movie" element={<CreateMovie />} />
+          <Route path="/access-denied" element={<AccessDenied />}></Route>
+          <Route path="/please-login" element={<PleaseLogin />}></Route>
         </Routes>
         </UserContext.Provider>
       </BrowserRouter>
@@ -73,4 +85,3 @@ function App() {
 }
 
 export default App;
-

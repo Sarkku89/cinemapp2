@@ -2,12 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUserContext } from './UserContext';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const { user } = useUserContext();
   const [userTickets, setUserTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/please-login');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const fetchUserTickets = async () => {
