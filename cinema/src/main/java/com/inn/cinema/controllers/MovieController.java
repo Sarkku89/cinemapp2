@@ -31,6 +31,16 @@ public class MovieController {
         return movieRepository.save(movie);
     }
 
+    @GetMapping(value = "/genres")
+    public List<String> getAllGenres() {
+        return movieRepository.findAllGenres();
+    }
+
+    @GetMapping(value = "/movies/by-genre/{genre}")
+    public List<Movie> getByGenre(@PathVariable String genre) {
+        return movieRepository.findByGenre(genre);
+    }
+
     @PutMapping(value = "/movies/{id}")
     public Movie update( @RequestBody Movie movie,
 

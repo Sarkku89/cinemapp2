@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useUserContext } from './UserContext';
 
-const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets }) => {
-    const modalClassName = screenings.length > 0 ? 'screening-modal visible' : 'screening-modal';
-    const user = useUserContext();
-  
-    const handleBookTickets = () => {
-      if (!user || !selectedScreening) {
-        console.error('User ID or screening not available');
-        return;
-      }
-  
-      // Pass the entire screening object to onBookTickets
-      onBookTickets(selectedScreening);
-    };
-  
-    return (
 
-      <div className={modalClassName}>
-        <div className="modal-content">
-          <h2>Screenings</h2>
-          {!user.user && (
-            <p id="warning">Log in to book tickets.</p>
-          )}
+const ScreeningModal = ({ movieId, screenings, selectedScreening, onClose, onBookTickets}) => {
+  const modalClassName = screenings.length > 0 ? 'screening-modal visible' : 'screening-modal';
+  const user = useUserContext();
+  const [modalHeader, setModalHeader] = useState('');
+ 
+  useEffect(() => {
+    // Fetch movie details and update modal header
+    const fetchMovieDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/movies/${movieId}`);
+        const movieName = response.data.title;
+        setModalHeader(`Screenings for ${movieName}`);
+      } catch (error) {
+        console.error('Error fetching movie details:', error);
+      }
+    };
+
+    fetchMovieDetails();
+  }, [movieId]);
+
+  const handleBookTickets = () => {
+    if (!user || !selectedScreening) {
+      console.error('User ID or screening not available');
+      return;
+    }
+
+    // Pass the entire screening object to onBookTickets
+    onBookTickets(selectedScreening);
+    
+  };
+
+  return (
+
+    <div className={modalClassName}>
+      <div className="modal-content">
+        <h2>{modalHeader}</h2>
+
+        {!user.user && (
+          <p id="warning">Log in to book tickets.</p>
+        )}
 
         {screenings.length > 0 ? (
           <div className="screening-details">
@@ -30,8 +50,8 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
               <thead>
                 <tr>
                   <th>Time</th>
-                  <th>Auditorium name</th>
-                  <th>Auditorium size</th>
+                  <th>Auditorium</th>
+                  <th>Seats</th>
                   <th></th>
                 </tr>
               </thead>
@@ -41,20 +61,36 @@ const ScreeningModal = ({ screenings, selectedScreening, onClose, onBookTickets 
                     <td>{screening.date}</td>
                     <td>{screening.auditorium.name}</td>
                     <td>{screening.auditorium.size}</td>
-                    <td>
-                      {user.user && (
+
+                    {user.user && (
+                      <td>
                         <button onClick={() => handleBookTickets(screening)}>
                           Book Tickets
                         </button>
-                      )}                     
-                    </td>
+                      </td>
+                    )}
+
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          <p>No screenings available</p>
+          <div className="screening-details">
+          <table className='modal-table'>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Auditorium</th>
+                <th>Seats</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <td colSpan={3}>No screenings at the moment!</td>
+            </tbody>
+          </table>
+        </div>
         )}
 
         {/* Close button */}

@@ -14,7 +14,7 @@ const Profile = () => {
     if (!user) {
       navigate('/please-login');
     }
-  }, [navigate]);
+  }, [navigate, user]);
 
   useEffect(() => {
     const fetchUserTickets = async () => {

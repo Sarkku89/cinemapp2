@@ -18,7 +18,7 @@ const CreateMovie = () => {
     if (!user || !user.admin) {
       navigate('/access-denied');
     }
-  }, [navigate]);
+  }, [navigate, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
