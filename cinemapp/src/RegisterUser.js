@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-//import axios from 'axios';
-import { createUser } from './api/axios';
+import axios from 'axios';
 
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -63,32 +62,14 @@ const RegisterUser = () => {
     }, [name, pwd, matchPwd])
 
 
-    /*function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:8081/register', { name, email, password: pwd })
+        axios.post('http://localhost:8080/users', { "name": name, "email": email, "password": pwd })
             .then(res => {
                 console.log(res)
-            }).catch(err => console.log(err));
-            setSuccess(true);
-    }*/
-
-    const handleSubmit = async (event) => {       
-        try {
-            event.preventDefault();
-            const newUser = {
-                "name": name, 
-                "email": email,
-                "password": pwd
-            }
-            await createUser(newUser);
-            // Fetch updated user list after creation
-            //const response = await getAllUsers();
-            //setUsers(response.data);
-            setSuccess(true)
-        } catch (error) {
-            console.error('Error creating user:', error);
-        }
-    };
+                setSuccess(true);
+            }).catch(err => console.log(err));           
+    }
 
     return (
         <>
@@ -96,7 +77,7 @@ const RegisterUser = () => {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <a href="/login">Sign In</a>
                     </p>
                 </section>
             ) : (

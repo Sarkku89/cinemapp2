@@ -6,6 +6,7 @@ import RegisterUser from './RegisterUser';
 import Gallery from './Gallery';
 import Login from './LogIn';
 import Profile from './Profile';
+import CreateMovie from './CreateMovie';
 import { useState } from 'react';
 import UserContext from './UserContext';
 
@@ -63,6 +64,7 @@ function App() {
           <Route path="/register" element={<RegisterUser />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/create-movie" element={<CreateMovie />} />
         </Routes>
         </UserContext.Provider>
       </BrowserRouter>
