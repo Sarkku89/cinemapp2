@@ -109,7 +109,7 @@ body td,
 body button {
   font-size: medium;
   font-weight: 600;
-  text-align: left;
+  text-align: center;
   padding: 15px;
   margin-top: 5px;
 }
@@ -271,4 +271,8 @@ body h2 {
 
 #h2-profile {
   color: goldenrod;
+}
+
+#no-screenings {
+  color:black;
 }

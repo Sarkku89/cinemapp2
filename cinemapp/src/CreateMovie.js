@@ -15,7 +15,7 @@ const CreateMovie = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user || !user.admin) {
+    if (!user || !user.user || !user.user.admin) {
       navigate('/access-denied');
     }
   }, [navigate, user]);

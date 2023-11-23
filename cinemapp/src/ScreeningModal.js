@@ -4,7 +4,7 @@ import { useUserContext } from './UserContext';
 
 
 const ScreeningModal = ({ movieId, screenings, selectedScreening, onClose, onBookTickets}) => {
-  const modalClassName = screenings.length > 0 ? 'screening-modal visible' : 'screening-modal';
+  const modalClassName = screenings.length >= 0 ? 'screening-modal visible' : 'screening-modal';
   const user = useUserContext();
   const [modalHeader, setModalHeader] = useState('');
  
@@ -76,21 +76,7 @@ const ScreeningModal = ({ movieId, screenings, selectedScreening, onClose, onBoo
             </table>
           </div>
         ) : (
-          <div className="screening-details">
-          <table className='modal-table'>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Auditorium</th>
-                <th>Seats</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <td colSpan={3}>No screenings at the moment!</td>
-            </tbody>
-          </table>
-        </div>
+          <p id="no-screenings">No screenings at the moment!</p>
         )}
 
         {/* Close button */}

@@ -88,6 +88,7 @@ const Gallery = () => {
       // Open the modal
       setSelectedMovieId(id);
       setIsModalOpen(true);
+      
     } catch (error) {
       console.error('Error fetching screenings:', error);
     }
