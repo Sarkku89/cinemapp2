@@ -1,6 +1,7 @@
 package com.inn.cinema.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 //import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,9 +51,9 @@ public class UserController {
     }
 
     @PutMapping(value = "/users/{id}")
-    public User update( @RequestBody User user,
+    public User update(@RequestBody User user,
 
-    @PathVariable(name = "id") Integer id) {
+            @PathVariable(name = "id") Integer id) {
         User u = userRepository.findById(id).get();
         u.setName(user.getName());
         u.setEmail(user.getEmail());
@@ -66,4 +67,23 @@ public class UserController {
         userRepository.delete(u);
         return u;
     }
+
+    @PutMapping(value = "/users/{id}/admin")
+    public ResponseEntity<?> updateAdminStatus(@PathVariable(name = "id") Integer id,
+            @RequestBody Map<String, Boolean> adminStatus) {
+        try {
+            User user = userRepository.findById(id)
+                    .orElseThrow(() -> new NoSuchElementException("User not found with id " + id));
+
+            // Set admin status based on the boolean value received in the request
+            user.setAdmin(adminStatus.get("admin"));
+
+            userRepository.save(user);
+
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating admin status");
+        }
+    }
+
 }

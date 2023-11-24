@@ -109,7 +109,7 @@ body td,
 body button {
   font-size: medium;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   padding: 15px;
   margin-top: 5px;
 }
@@ -121,6 +121,11 @@ input {
 body button {
   background-color: goldenrod;
   border-radius: 5px;
+}
+
+#delete-btn {
+  padding: 5px;
+  background-color: red;
 }
 
 body th {
@@ -181,13 +186,20 @@ body h2 {
   justify-content: center;
   background-color: #ebc358;
   padding: 15px;
-  margin: 25px 25px 25px 25px;
+  margin: 50px 25px 25px 25px;
 }
 
 .genre-filter {
   position: fixed;
-  top: 50px;
-  left: 40px;
+  top: 70px;
+  left: 0px;
+  background-color: black;
+  padding: 0px 10px 10px 0px;
+  border-radius: 5px 0px 5px 5px;
+}
+
+#genre-header{
+  padding-left:35px;
 }
 
 @media only screen and (max-width: 600px) {

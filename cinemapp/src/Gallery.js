@@ -117,7 +117,7 @@ const Gallery = () => {
     <div className="gallery-container">
       {/* Genre filter */}
       <div className="genre-filter">
-        <label htmlFor="genre">Filter by Genre:</label>
+        <label id="genre-header" htmlFor="genre">Filter by Genre:</label>
         <select id="genre" onChange={(e) => handleGenreChange(e.target.value)}>
           <option value="">All Genres</option>
           {genres.map((genre) => (
