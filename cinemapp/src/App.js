@@ -8,6 +8,7 @@ import Login from './LogIn';
 import Profile from './Profile';
 import CreateMovie from './CreateMovie';
 import CreateScreening from './CreateScreening';
+import CreateAuditorium from './CreateAuditorium';
 import { useState } from 'react';
 import UserContext from './UserContext';
 import AccessDenied from './AccessDenied';
@@ -52,13 +53,17 @@ function App() {
                         <Link to="/create-movie">Add movies</Link>
                       </li>
                       <li>
+                        {/* Show "Add auditoriums" link only if the user is an admin */}
+                        <Link to="/create-auditorium">Add auditoriums</Link>
+                      </li>
+                      <li>
                         {/* Show "Add screenings" link only if the user is an admin */}
                         <Link to="/create-screening">Add screenings</Link>
                       </li>
                       <li>
                         {/* Show "Manage Users" link only if the user is an admin */}
                         <Link to="/manage-users">Manage Users</Link>
-                      </li>
+                      </li>                     
                     </>
                   )}
                   <li>
@@ -86,6 +91,7 @@ function App() {
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/create-movie" element={<CreateMovie />} />
             <Route path="/create-screening" element={<CreateScreening />} />
+            <Route path="/create-auditorium" element={<CreateAuditorium />} />
             <Route path="/access-denied" element={<AccessDenied />} />
             <Route path="/please-login" element={<PleaseLogin />} />
             <Route path="/manage-users" element={<ManageUsers />} />
