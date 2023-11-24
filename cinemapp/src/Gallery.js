@@ -10,7 +10,7 @@ const Gallery = () => {
   const [allMovies, setAllMovies] = useState([]);
   const [screenings, setScreenings] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
-  const [selectedScreening, setSelectedScreening] = useState(null);
+  //const [selectedScreening, setSelectedScreening] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
@@ -83,7 +83,7 @@ const Gallery = () => {
       setScreenings(response.data || []);
   
       // Update the selected screening state based on the clicked screening
-      setSelectedScreening(null);
+      //setSelectedScreening(null);
   
       // Open the modal
       setSelectedMovieId(id);
@@ -109,7 +109,7 @@ const Gallery = () => {
   const handleCloseModal = () => {
     setSelectedMovieId(null);
     setScreenings([]);
-    setSelectedScreening(null);
+    //setSelectedScreening(null);
     setIsModalOpen(false); // Close the modal
   };
 
@@ -139,7 +139,6 @@ const Gallery = () => {
         <ScreeningModal
           movieId={selectedMovieId}
           screenings={screenings}
-          selectedScreening={selectedScreening}
           onClose={handleCloseModal}
           onBookTickets={handleBookTickets}
         />
