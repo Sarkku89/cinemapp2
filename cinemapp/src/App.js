@@ -12,6 +12,7 @@ import { useState } from 'react';
 import UserContext from './UserContext';
 import AccessDenied from './AccessDenied';
 import PleaseLogin from './PleaseLogin';
+import ManageUsers from './ManageUsers';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,12 +37,12 @@ function App() {
           <nav>
             <ul>
               <li>
-              <Link to="/">Home</Link>
+                <Link to="/">Home</Link>
               </li>
               {user && (
                 <>
                   <li>
-                    {/* Show Profile link only when user is logged in */}
+                    {/* Show Profile link only when the user is logged in */}
                     <Link to="/profile">Profile</Link>
                   </li>
                   {user.admin && (
@@ -53,6 +54,10 @@ function App() {
                       <li>
                         {/* Show "Add screenings" link only if the user is an admin */}
                         <Link to="/create-screening">Add screenings</Link>
+                      </li>
+                      <li>
+                        {/* Show "Manage Users" link only if the user is an admin */}
+                        <Link to="/manage-users">Manage Users</Link>
                       </li>
                     </>
                   )}
@@ -68,24 +73,23 @@ function App() {
                   <Link to="/login">Log In</Link>
                 </li>
               )}
-              <li>
-                {!user && <Link to="/register">Register</Link>}
-              </li>
+              <li>{!user && <Link to="/register">Register</Link>}</li>
             </ul>
           </nav>
         </header>
-        <UserContext.Provider value={{user}} >
-        <Routes>
-          <Route path="/" element={<Gallery />} />
-          <Route path="/updateuser" element={<UpdateUser />} />
-          <Route path="/register" element={<RegisterUser />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/create-movie" element={<CreateMovie />} />
-          <Route path="/create-screening" element={<CreateScreening />} />
-          <Route path="/access-denied" element={<AccessDenied />}></Route>
-          <Route path="/please-login" element={<PleaseLogin />}></Route>
-        </Routes>
+        <UserContext.Provider value={{ user }}>
+          <Routes>
+            <Route path="/" element={<Gallery />} />
+            <Route path="/updateuser" element={<UpdateUser />} />
+            <Route path="/register" element={<RegisterUser />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/create-movie" element={<CreateMovie />} />
+            <Route path="/create-screening" element={<CreateScreening />} />
+            <Route path="/access-denied" element={<AccessDenied />} />
+            <Route path="/please-login" element={<PleaseLogin />} />
+            <Route path="/manage-users" element={<ManageUsers />} />
+          </Routes>
         </UserContext.Provider>
       </BrowserRouter>
     </div>
