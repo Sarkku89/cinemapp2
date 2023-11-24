@@ -7,6 +7,7 @@ import Gallery from './Gallery';
 import Login from './LogIn';
 import Profile from './Profile';
 import CreateMovie from './CreateMovie';
+import CreateScreening from './CreateScreening';
 import { useState } from 'react';
 import UserContext from './UserContext';
 import AccessDenied from './AccessDenied';
@@ -44,10 +45,16 @@ function App() {
                     <Link to="/profile">Profile</Link>
                   </li>
                   {user.admin && (
-                    <li>
-                      {/* Show "Add movies" link only if the user is an admin */}
-                      <Link to="/create-movie">Add movies</Link>
-                    </li>
+                    <>
+                      <li>
+                        {/* Show "Add movies" link only if the user is an admin */}
+                        <Link to="/create-movie">Add movies</Link>
+                      </li>
+                      <li>
+                        {/* Show "Add screenings" link only if the user is an admin */}
+                        <Link to="/create-screening">Add screenings</Link>
+                      </li>
+                    </>
                   )}
                   <li>
                     <Link to="/" onClick={handleLogout}>
@@ -75,6 +82,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/create-movie" element={<CreateMovie />} />
+          <Route path="/create-screening" element={<CreateScreening />} />
           <Route path="/access-denied" element={<AccessDenied />}></Route>
           <Route path="/please-login" element={<PleaseLogin />}></Route>
         </Routes>

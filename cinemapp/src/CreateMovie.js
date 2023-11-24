@@ -9,13 +9,15 @@ const CreateMovie = () => {
     duration: '',
     language: '',
     genre: '',
+    imgurl: ''
   });
+  
   const user = useUserContext();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user || !user.admin) {
+    if (!user || !user.user || !user.user.admin) {
       navigate('/access-denied');
     }
   }, [navigate, user]);
@@ -61,6 +63,11 @@ const CreateMovie = () => {
         <label>
           Genre:
           <input type="text" name="genre" value={movieData.genre} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Image:
+          <input type="text" name="imgurl" value={movieData.imgurl} onChange={handleChange} />
         </label>
         <br />
         <button type="submit">Create Movie</button>
