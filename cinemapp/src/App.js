@@ -17,6 +17,9 @@ import ManageUsers from './ManageUsers';
 import ManageScreenings from './ManageScreenings';
 import EditScreenings from './EditScreenings';
 import EditScreeningForm from './EditScreeningForm';
+import AdminScreenings from './AdminScreenings';
+import AdminAuditoriums from './AdminAuditoriums';
+import AdminMovies from './AdminMovies';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -50,25 +53,19 @@ function App() {
                   </li>
                   {user.admin && (
                     <>
+                    {/* Only for admnins */}
                       <li>
-                        {/* Show "Add movies" link only if the user is an admin */}
-                        <Link to="/create-movie">Add movies</Link>
+                        
+                        <Link className='admin-link' to="/admin-movies">Movies</Link>
                       </li>
                       <li>
-                        {/* Show "Add auditoriums" link only if the user is an admin */}
-                        <Link to="/create-auditorium">Add auditoriums</Link>
+                        <Link className='admin-link' to="/admin-screenings">Screenings</Link>
                       </li>
                       <li>
-                        {/* Show "Add screenings" link only if the user is an admin */}
-                        <Link to="/create-screening">Add screenings</Link>
+                        <Link className='admin-link' to="/admin-auditoriums">Auditoriums</Link>
                       </li>
                       <li>
-                        {/* Show "Manage Screenings" link only if the user is an admin */}
-                        <Link to="/manage-screenings">Manage Screenings</Link>
-                      </li>
-                      <li>
-                        {/* Show "Manage Users" link only if the user is an admin */}
-                        <Link to="/manage-users">Manage Users</Link>
+                        <Link className='admin-link' to="/manage-users">Manage Users</Link>
                       </li>                     
                     </>
                   )}
@@ -101,8 +98,10 @@ function App() {
             <Route path="/access-denied" element={<AccessDenied />} />
             <Route path="/please-login" element={<PleaseLogin />} />
             <Route path="/manage-users" element={<ManageUsers />} />
-            {/* Add the route for managing screenings */}
             <Route path="/manage-screenings" element={<ManageScreenings />} />
+            <Route path="/admin-screenings" element={<AdminScreenings />} />
+            <Route path="/admin-movies" element={<AdminMovies />} />
+            <Route path="/admin-auditoriums" element={<AdminAuditoriums />} />
             <Route path="/manage-screenings/edit/:movieId" element={<EditScreenings />} />
             <Route path="/manage-screenings/edit/:movieId/screening/:screeningId" element={<EditScreeningForm />} />
 

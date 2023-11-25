@@ -22,11 +22,12 @@ header {
 nav ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
 }
 
 nav li {
   margin-right: 20px;
-  /* Adjust the margin between navigation links */
+  margin-bottom: 10px;
 }
 
 a,
@@ -42,6 +43,16 @@ a:hover {
 nav a {
   text-decoration: none;
   color: goldenrod;
+}
+
+.admin-link,
+.admin-link:visited {
+  color: lightgreen;
+
+}
+
+.admin-link:hover {
+  color: white;
 }
 
 .App {
@@ -115,14 +126,24 @@ body button {
   margin-top: 5px;
 }
 
-body option, select, input {
+body a {
+  font-size: large;
+  color: goldenrod;
+}
+
+body option,
+select,
+input {
   background-color: lightyellow;
   width: 50%;
-  border-radius: 5px; 
+  border-radius: 5px;
   align-self: center;
 }
 
-body td, body button, option, select {
+body td,
+body button,
+option,
+select {
   font-family: 'Courier New', Courier, monospace;
   font-size: medium;
   font-weight: 600;
@@ -131,7 +152,10 @@ body td, body button, option, select {
   margin-top: 5px;
 }
 
-input[type="text"], input[type="password"], button, textarea {
+input[type="text"],
+input[type="password"],
+button,
+textarea {
   font-family: 'Courier New', Courier, monospace;
 
 }
@@ -155,7 +179,7 @@ body th {
 
 }
 
-.login-input{
+.login-input {
   width: 100%;
 
 }
@@ -220,8 +244,8 @@ body h2 {
   border-radius: 5px 0px 5px 5px;
 }
 
-#genre-header{
-  padding-left:20px;
+#genre-header {
+  padding-left: 20px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -241,7 +265,7 @@ body h2 {
   /* Include padding and border in the box sizing */
 }
 
-#save-btn{
+#save-btn {
   width: 80px;
   padding: 5px;
   text-align: center;
@@ -296,7 +320,30 @@ body h2 {
   width: 100%;
 }
 
-.tickets-table td,td {
+.users-table {
+  background-color: lightyellow;
+  border-radius: 10px;
+}
+
+.users-table td {
+  color: black;
+}
+
+.users-table th:first-child {
+  border-radius: 10px 0px 0px 0px;
+}
+.users-table th:last-child {
+  border-radius: 0px 10px 0px 0px;
+}
+
+.admin-radio {
+  width: 15px;
+  height: 15px;
+}
+
+
+.tickets-table td,
+td {
   color: goldenrod;
 }
 
@@ -314,5 +361,5 @@ body h2 {
 }
 
 #no-screenings {
-  color:black;
+  color: black;
 }

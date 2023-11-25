@@ -70,7 +70,7 @@ const ManageUsers = () => {
   return (
     <div className='gallery-container'>
       <h2 id='h2-profile'>Manage Users</h2>
-      <table className="table">
+      <table className="users-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -87,6 +87,7 @@ const ManageUsers = () => {
               <td>
                 <label>
                   <input
+                    className='admin-radio'
                     type="checkbox"
                     checked={user.admin}
                     onChange={() => handleAdminToggle(user.id, user.admin)}
