@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from './UserContext';
+import DatePicker from 'react-datepicker'; // Import DatePicker
+import 'react-datepicker/dist/react-datepicker.css'; // Import styles for DatePicker
+
 
 const CreateScreening = () => {
   const [screeningData, setScreeningData] = useState({
@@ -70,6 +73,13 @@ const CreateScreening = () => {
     }
   };
 
+  const handleDateChange = (date) => {
+    setScreeningData({
+      ...screeningData,
+      date,
+    });
+  };
+
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -84,7 +94,7 @@ const CreateScreening = () => {
         auditorium: {
           id: screeningData.auditorium_id,
         },
-        date: screeningData.date,
+        date: screeningData.date.toISOString().split('T')[0], 
       });
       console.log('Screening created successfully:', response.data);
       navigate('/');
@@ -135,7 +145,11 @@ const CreateScreening = () => {
         <br />
         <label>
           Date:
-          <input type="text" name="date" value={screeningData.date} onChange={handleChange} />
+          <DatePicker
+            selected={screeningData.date}
+            onChange={handleDateChange}
+            dateFormat="dd.MM.yyyy"
+          />
         </label>
         <br />
         <button type="submit">Create Screening</button>

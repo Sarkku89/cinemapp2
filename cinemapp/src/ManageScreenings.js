@@ -39,9 +39,9 @@ const ManageScreenings = () => {
 
   return (
     <div>
-      <h2>Manage Screenings</h2>
+      <h2 id="h2-profile">Manage Screenings</h2>
       <div>
-        <label>Select Movie:</label>
+        <label>Select Movie:</label><br />
         <select
           onChange={(e) => setSelectedMovie(JSON.parse(e.target.value))}
           value={selectedMovie ? JSON.stringify(selectedMovie) : ''}
@@ -52,7 +52,7 @@ const ManageScreenings = () => {
               {movie.title}
             </option>
           ))}
-        </select>
+        </select><br /><br/>
         <button onClick={handleEditScreenings}>Edit Screenings</button>
       </div>
       {/* Display the table of screenings */}

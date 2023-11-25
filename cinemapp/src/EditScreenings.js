@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import EditScreeningForm from './EditScreeningForm';
 import { useUserContext } from './UserContext';
+import { Link } from 'react-router-dom';
 
 const EditScreenings = () => {
     const { movieId } = useParams();
     const [screenings, setScreenings] = useState([]);
     const [movie, setMovie] = useState({});
-    //const navigate = useNavigate();
     const [auditoriums, setAuditoriums] = useState({});
     const [selectedScreening, setSelectedScreening] = useState(null);
     const [auditorium, setAuditorium] = useState();
@@ -102,39 +102,48 @@ const EditScreenings = () => {
     return (
         <div>
             <h2 id="h2-profile">Edit Screenings for {movie.title}</h2>
-            {/* Display the table of screenings */}
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Auditorium</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {screenings.map((screening) => (
-                        <tr key={screening.id}>
-                            <td>{screening.id}</td>
-                            <td>{screening.date}</td>
-                            <td key={screening.auditorium.id}>{auditoriums[screening.auditorium.id - 1]?.name}</td>
-                            <td>
-                                <button onClick={() => handleEditScreening(screening.id, screening.auditorium.id)}>Edit</button>
-                                {deleteConfirmation ? (
-                                    <>
-                                        <button onClick={() => handleDeleteScreening(screening.id)} style={{ backgroundColor: '#ff7400', color: "white" }}>
-                                            Confirm Delete?
-                                        </button>
-                                        <button onClick={() => setDeleteConfirmation(false)}>Cancel Delete</button>
-                                    </>
-                                ) : (
-                                    <button onClick={() => handleDeleteScreening(screening.id)} id="delete-btn">Delete</button>
-                                )}
-                            </td>
+
+            {screenings.length === 0 ? (
+                <>
+                    <p>No screenings for this movie</p>
+                    <Link to="/create-screening">Create a new screening</Link>
+                </>
+            ) : (
+                // Display the table of screenings
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Auditorium</th>
+                            <th>Action</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {screenings.map((screening) => (
+                            <tr key={screening.id}>
+                                <td>{screening.id}</td>
+                                <td>{screening.date}</td>
+                                <td key={screening.auditorium.id}>{auditoriums[screening.auditorium.id - 1]?.name}</td>
+                                <td>
+                                    <button onClick={() => handleEditScreening(screening.id, screening.auditorium.id)}>Edit</button>
+                                    {deleteConfirmation ? (
+                                        <>
+                                            <button onClick={() => handleDeleteScreening(screening.id)} style={{ backgroundColor: '#ff7400', color: "white" }}>
+                                                Confirm Delete?
+                                            </button>
+                                            <button onClick={() => setDeleteConfirmation(false)}>Cancel Delete</button>
+                                        </>
+                                    ) : (
+                                        <button onClick={() => handleDeleteScreening(screening.id)} id="delete-btn">Delete</button>
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+
             {selectedScreening && (
                 <div>
                     <br />
@@ -152,8 +161,15 @@ const EditScreenings = () => {
                         />
                     )}
                 </div>
+                
             )}
 
+       
+        <>
+        <br />
+        <br />
+        <Link to="/manage-screenings"><button>Back to movie selection</button></Link>
+        </>
         </div>
     );
 };
