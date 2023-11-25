@@ -20,6 +20,7 @@ import EditScreeningForm from './EditScreeningForm';
 import AdminScreenings from './AdminScreenings';
 import AdminAuditoriums from './AdminAuditoriums';
 import AdminMovies from './AdminMovies';
+import EditMovies from './EditMovies';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -101,9 +102,11 @@ function App() {
             <Route path="/manage-screenings" element={<ManageScreenings />} />
             <Route path="/admin-screenings" element={<AdminScreenings />} />
             <Route path="/admin-movies" element={<AdminMovies />} />
+            <Route path="/manage-movies" element={<EditMovies />} />
             <Route path="/admin-auditoriums" element={<AdminAuditoriums />} />
             <Route path="/manage-screenings/edit/:movieId" element={<EditScreenings />} />
             <Route path="/manage-screenings/edit/:movieId/screening/:screeningId" element={<EditScreeningForm />} />
+
 
           </Routes>
         </UserContext.Provider>

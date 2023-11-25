@@ -135,7 +135,7 @@ body option,
 select,
 input {
   background-color: lightyellow;
-  width: 50%;
+  width: 100%;
   border-radius: 5px;
   align-self: center;
 }
@@ -222,6 +222,7 @@ body h2 {
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
+  min-width: 600px;
 }
 
 .movie-container {
@@ -289,6 +290,9 @@ body h2 {
   margin-bottom: 15px;
 }
 
+.movie-thumd{
+  width: 50px;
+}
 .details h4 {
   font-size: 20px;
   font-weight: bold;
