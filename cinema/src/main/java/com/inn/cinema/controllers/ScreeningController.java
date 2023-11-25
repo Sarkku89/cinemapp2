@@ -17,6 +17,7 @@ public class ScreeningController {
     @Autowired
     private ScreeningRepository screeningRepository;
 
+
     @GetMapping(value = "/screenings")
     public List<Screening> getAll() {
         return screeningRepository.findAll();
@@ -24,14 +25,14 @@ public class ScreeningController {
 
     @GetMapping(value = "/screenings/{id}")
     public Screening get(@PathVariable(name = "id") Integer id) {
-        return screeningRepository.findById(id).get();
+        return screeningRepository.findById(id).orElse(null);
     }
 
-    @GetMapping(value = "/screenings/by-movie/{movieId}")
-        public List<Screening> getByMovieId(@PathVariable(name = "movieId") Integer movieId) {
-            return screeningRepository.findByMovieId(movieId);
+     @GetMapping(value = "/screenings/by-movie/{movieId}")
+    public List<Screening> getScreeningsByMovieId(@PathVariable(name = "movieId") Integer movieId) {
+        return screeningRepository.findByMovieIdWithAuditorium(movieId);
     }
-    
+
     @PostMapping(value = "/screenings")
     public ResponseEntity<?> create(@RequestBody Screening screening) {
         try {
@@ -40,21 +41,37 @@ public class ScreeningController {
             return ResponseEntity.badRequest().body("Error: Auditorium is already used in another screening");
         }
     }
-
     @PutMapping(value = "/screenings/{id}")
-    public Screening update(@RequestBody Screening screening, @PathVariable(name = "id") Integer id) {
-        Screening s = screeningRepository.findById(id).get();
-        s.setMovie(screening.getMovie());
-        s.setAuditorium(screening.getAuditorium());
-        s.setDate(screening.getDate());
-        // Add more if needed for other properties
-        return screeningRepository.save(s);
+    public ResponseEntity<?> update(@PathVariable(name = "id") Integer id, @RequestBody Screening updatedScreening) {
+        try {
+            Screening screening = screeningRepository.findById(id)
+                    .orElseThrow(() -> new NoSuchElementException("Screening not found with id " + id));
+    
+            // Update the screening details
+            screening.setDate(updatedScreening.getDate());
+            screening.setAuditorium(updatedScreening.getAuditorium());
+            screening.setMovie(updatedScreening.getMovie());
+    
+            screeningRepository.save(screening);
+    
+            return ResponseEntity.ok(screening);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error updating screening details");
+        }
     }
+  
+
 
     @DeleteMapping(value = "/screenings/{id}")
-    public Screening delete(@PathVariable(name = "id") Integer id) {
-        Screening s = screeningRepository.findById(id).get();
-        screeningRepository.delete(s);
-        return s;
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Integer id) {
+        try {
+            Screening screening = screeningRepository.findById(id)
+                    .orElseThrow(() -> new NoSuchElementException("Screening not found with id " + id));
+
+            screeningRepository.delete(screening);
+            return ResponseEntity.ok(screening);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error deleting screening");
+        }
     }
 }

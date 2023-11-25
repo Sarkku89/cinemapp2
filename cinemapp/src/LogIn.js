@@ -27,10 +27,10 @@ const Login = ({ onLogin }) => {
       <h2 id="login-title">Login</h2>
       <form>
         <label htmlFor="email">Email:</label>
-        <input name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input className="login-input" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
         <label htmlFor="password">Password:</label>
-        <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input className="login-input" name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
         <button type="button" onClick={handleLogin}>Login</button>
       </form>

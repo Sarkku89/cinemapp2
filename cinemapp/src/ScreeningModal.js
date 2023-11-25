@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useUserContext } from './UserContext';
 
 
-const ScreeningModal = ({ movieId, screenings, selectedScreening, onClose, onBookTickets}) => {
+const ScreeningModal = ({ movieId, screenings, onClose, onBookTickets}) => {
   const modalClassName = screenings.length >= 0 ? 'screening-modal visible' : 'screening-modal';
   const user = useUserContext();
   const [modalHeader, setModalHeader] = useState('');
@@ -23,14 +23,10 @@ const ScreeningModal = ({ movieId, screenings, selectedScreening, onClose, onBoo
     fetchMovieDetails();
   }, [movieId]);
 
-  const handleBookTickets = () => {
-    if (!user || !selectedScreening) {
-      console.error('User ID or screening not available');
-      return;
-    }
-
+  const handleBookTickets = (screening) => {
+   
     // Pass the entire screening object to onBookTickets
-    onBookTickets(selectedScreening);
+    onBookTickets(screening);
     
   };
 

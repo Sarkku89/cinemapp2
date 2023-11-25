@@ -12,6 +12,9 @@ import UserContext from './UserContext';
 import AccessDenied from './AccessDenied';
 import PleaseLogin from './PleaseLogin';
 import ManageUsers from './ManageUsers';
+import ManageScreenings from './ManageScreenings';
+import EditScreenings from './EditScreenings';
+import EditScreeningForm from './EditScreeningForm';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -41,18 +44,19 @@ function App() {
               {user && (
                 <>
                   <li>
-                    {/* Show Profile link only when the user is logged in */}
                     <Link to="/profile">Profile</Link>
                   </li>
                   {user.admin && (
                     <>
-                      {/* Show "Add movies" link only if the user is an admin */}
                       <li>
                         <Link to="/create-movie">Add movies</Link>
                       </li>
-                      {/* Show "Manage Users" link only if the user is an admin */}
                       <li>
                         <Link to="/manage-users">Manage Users</Link>
+                      </li>
+                      <li>
+                        {/* Show "Manage Screenings" link only if the user is an admin */}
+                        <Link to="/manage-screenings">Manage Screenings</Link>
                       </li>
                     </>
                   )}
@@ -83,6 +87,11 @@ function App() {
             <Route path="/access-denied" element={<AccessDenied />} />
             <Route path="/please-login" element={<PleaseLogin />} />
             <Route path="/manage-users" element={<ManageUsers />} />
+            {/* Add the route for managing screenings */}
+            <Route path="/manage-screenings" element={<ManageScreenings />} />
+            <Route path="/manage-screenings/edit/:movieId" element={<EditScreenings />} />
+            <Route path="/manage-screenings/edit/:movieId/screening/:screeningId" element={<EditScreeningForm />} />
+
           </Routes>
         </UserContext.Provider>
       </BrowserRouter>

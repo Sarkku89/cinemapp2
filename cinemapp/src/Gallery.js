@@ -10,7 +10,6 @@ const Gallery = () => {
   const [allMovies, setAllMovies] = useState([]);
   const [screenings, setScreenings] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
-  const [selectedScreening, setSelectedScreening] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
@@ -82,9 +81,6 @@ const Gallery = () => {
       // Always set the screenings, even if the response is empty
       setScreenings(response.data || []);
   
-      // Update the selected screening state based on the clicked screening
-      setSelectedScreening(null);
-  
       // Open the modal
       setSelectedMovieId(id);
       setIsModalOpen(true);
@@ -109,7 +105,6 @@ const Gallery = () => {
   const handleCloseModal = () => {
     setSelectedMovieId(null);
     setScreenings([]);
-    setSelectedScreening(null);
     setIsModalOpen(false); // Close the modal
   };
 
@@ -118,7 +113,7 @@ const Gallery = () => {
       {/* Genre filter */}
       <div className="genre-filter">
         <label id="genre-header" htmlFor="genre">Filter by Genre:</label>
-        <select id="genre" onChange={(e) => handleGenreChange(e.target.value)}>
+        <select className='select-genre' onChange={(e) => handleGenreChange(e.target.value)}>
           <option value="">All Genres</option>
           {genres.map((genre) => (
             <option key={genre} value={genre}>
@@ -139,7 +134,6 @@ const Gallery = () => {
         <ScreeningModal
           movieId={selectedMovieId}
           screenings={screenings}
-          selectedScreening={selectedScreening}
           onClose={handleCloseModal}
           onBookTickets={handleBookTickets}
         />
