@@ -24,10 +24,12 @@ const ScreeningModal = ({ movieId, screenings, onClose, onBookTickets}) => {
   }, [movieId]);
 
   const handleBookTickets = (screening) => {
-   
+    if (!user) {
+      console.error('User ID not available');
+      return;
+    }
     // Pass the entire screening object to onBookTickets
-    onBookTickets(screening);
-    
+    onBookTickets(screening);   
   };
 
   return (

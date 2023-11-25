@@ -10,6 +10,7 @@ const Gallery = () => {
   const [allMovies, setAllMovies] = useState([]);
   const [screenings, setScreenings] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
+  //const [selectedScreening, setSelectedScreening] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
@@ -80,6 +81,9 @@ const Gallery = () => {
       
       // Always set the screenings, even if the response is empty
       setScreenings(response.data || []);
+  
+      // Update the selected screening state based on the clicked screening
+      //setSelectedScreening(null);
   
       // Open the modal
       setSelectedMovieId(id);
