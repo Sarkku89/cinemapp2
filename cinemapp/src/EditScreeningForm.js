@@ -19,16 +19,13 @@ const EditScreeningForm = ({ screeningId, initialData, auditoriums, movieId, onS
 
     try {
       await axios.put(`http://localhost:8080/screenings/${screeningId}`, {
-        date: newDate.toISOString().split('T')[0], // Format the date for the backend
-        auditorium_id: selectedAuditorium.id,
+        date: newDate.toISOString().split('T')[0], 
+        auditorium: selectedAuditorium,
         movie: initialData.movie
       });
 
       onSave({
-        id: screeningId,
-        date: newDate.toISOString().split('T')[0], // Format the date for display
-        auditorium: selectedAuditorium,
-        movie: initialData.movie
+        success: true
       });
     } catch (error) {
       console.error('Error updating screening:', error);

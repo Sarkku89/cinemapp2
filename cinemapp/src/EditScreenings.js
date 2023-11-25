@@ -21,9 +21,9 @@ const EditScreenings = () => {
 
     useEffect(() => {
         if (!user || !user.user || !user.user.admin) {
-          navigate('/access-denied');
-        } 
-      }, [navigate, user]);
+            navigate('/access-denied');
+        }
+    }, [navigate, user]);
 
     useEffect(() => {
         // Fetch the list of screenings for the selected movie when the component mounts
@@ -93,27 +93,10 @@ const EditScreenings = () => {
         setTitleId(screeningId);
     };
 
-    const handleSaveScreening = async (updatedData) => {
-        console.log('Received data in handleSaveScreening:', updatedData);
-
-        try {
-            // Ensure that updatedData has the necessary properties, including 'id'
-            if (!updatedData || !updatedData.id) {
-                console.error('Invalid screening ID:', updatedData && updatedData.id);
-                return;
-            }
-            console.log()
-            // Send a request to update the screening
-            await axios.put(`http://localhost:8080/screenings/${updatedData.id}`, {
-                date: updatedData.date,
-                auditorium: updatedData.auditorium,
-                movie: updatedData.movie
-            });
-
+    const handleSaveScreening = async (success) => {
+        if (success) {
             fetchScreenings();
             setSuccess(true);
-        } catch (error) {
-            console.error('Error updating screening:', error);
         }
     };
     return (
