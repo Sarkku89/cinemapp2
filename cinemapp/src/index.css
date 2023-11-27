@@ -44,9 +44,10 @@ a, a:visited {
 
 input[type="text"],
 input[type="password"],
+input[type="email"],
 button,
 textarea {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;

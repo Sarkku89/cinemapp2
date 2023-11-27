@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from './UserContext';
-import DatePicker from 'react-datepicker'; // Import DatePicker
-import 'react-datepicker/dist/react-datepicker.css'; // Import styles for DatePicker
+import DatePicker from 'react-datepicker'; 
+import 'react-datepicker/dist/react-datepicker.css'; 
 
 
 const CreateScreening = () => {
@@ -145,12 +145,12 @@ const CreateScreening = () => {
         <br />
         <label>
           Date:
+          </label>
           <DatePicker
             selected={screeningData.date}
             onChange={handleDateChange}
             dateFormat="dd.MM.yyyy"
           />
-        </label>
         <br />
         <button type="submit">Create Screening</button>
       </form>

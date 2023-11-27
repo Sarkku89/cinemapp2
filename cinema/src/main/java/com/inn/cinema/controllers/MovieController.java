@@ -50,6 +50,7 @@ public class MovieController {
         u.setDuration(movie.getDuration());
         u.setGenre(movie.getGenre());
         u.setLanguage(movie.getLanguage());
+        u.setImgurl(movie.getImgurl());
         return movieRepository.save(u);
     }
 

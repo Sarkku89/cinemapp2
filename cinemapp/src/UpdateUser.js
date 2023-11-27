@@ -35,6 +35,7 @@ const UpdateUser = () => {
   const [success, setSuccess] = useState(false);
 
   const [formChanged, setFormChanged] = useState(false);
+  
 
   useEffect(() => {
     nameRef.current.focus();
@@ -78,6 +79,7 @@ const UpdateUser = () => {
           name: updatedName,
           email: updatedEmail,
           password: updatedPassword,
+          admin: user.admin
         };
     
       updateUser(user.id, userData);
@@ -91,7 +93,7 @@ const UpdateUser = () => {
     <>
       {success ? (
         <section>
-          <h1>Success!</h1>
+          <h2 id="h2-profile">Success!</h2>
           <p>
             <Link to="/profile">Return to Profile</Link>
           </p>
@@ -99,7 +101,7 @@ const UpdateUser = () => {
       ) : (
         <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "ofscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1 id="register-h1">Register name</h1>
+                    <h1 id="register-h1">Edit profile</h1>
                     <form onSubmit={handleSubmit}>
 
                         <label id="register-label" htmlFor="email">Name:</label>

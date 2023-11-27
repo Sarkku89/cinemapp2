@@ -103,7 +103,10 @@ const EditMovies = () => {
             <label>Select Movie:</label><br /><br />
             <div style={{ display: "flex" }} className='edit-form-container'>
                 <select
-                    onChange={(e) => setSelectedMovie(JSON.parse(e.target.value))}
+                    onChange={(e) => {
+                        const selectedValue = e.target.value;
+                        setSelectedMovie(selectedValue !== '' ? JSON.parse(selectedValue) : null);
+                    }}
                     value={selectedMovie ? JSON.stringify(selectedMovie) : ''}
                 >
                     <option value="">Select a movie</option>
@@ -113,16 +116,23 @@ const EditMovies = () => {
                         </option>
                     ))}
                 </select>
-                <button onClick={handleEditMovie}>Edit</button>
-                {deleteConfirmation ? (
+                <button onClick={handleEditMovie} disabled={!selectedMovie}>
+                    Edit
+                </button>
+
+                {selectedMovie && (
                     <>
-                        <button onClick={() => handleDeleteMovie(selectedMovie.id)} style={{ backgroundColor: '#ff7400', color: "white" }}>
-                            Confirm Delete?
-                        </button>
-                        <button onClick={() => setDeleteConfirmation(false)}>Cancel Delete</button>
+                        {deleteConfirmation ? (
+                            <>
+                                <button onClick={() => handleDeleteMovie(selectedMovie.id)} style={{ backgroundColor: '#ff7400', color: "white" }}>
+                                    Confirm Delete?
+                                </button>
+                                <button onClick={() => setDeleteConfirmation(false)}>Cancel Delete</button>
+                            </>
+                        ) : (
+                            <button onClick={() => handleDeleteMovie(selectedMovie.id)} id="delete-btn">Delete</button>
+                        )}
                     </>
-                ) : (
-                    <button onClick={() => handleDeleteMovie(selectedMovie.id)} id="delete-btn">Delete</button>
                 )}
             </div>
             <div>
