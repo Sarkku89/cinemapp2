@@ -18,7 +18,7 @@ const AdminMovies = () => {
         <div>
             <h2 id="h2-profile">Movies Management</h2>
 
-                    <Link to="/create-screening">Add movies</Link><br />
+                    <Link to="/create-movie">Add movies</Link><br />
                     <Link to="/manage-movies">Manage movies</Link>
 
         </div>
