@@ -35,12 +35,17 @@ const UpdateUser = () => {
   const [success, setSuccess] = useState(false);
 
   const [formChanged, setFormChanged] = useState(false);
+  const [userTitle, setUserTitle] = useState("");
   
 
   useEffect(() => {
     nameRef.current.focus();
     setOriginalUser({ name: user.name, email: user.email });
   }, [user]);
+
+  useEffect(() => {
+    setUserTitle();
+  }, [setUserTitle]);
 
   useEffect(() => {
     const result = USER_REGEX.test(name);
@@ -65,6 +70,19 @@ const UpdateUser = () => {
   useEffect(() => {
     setErrMsg('');
   }, [name, pwd, matchPwd]);
+
+  const fetchUser = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/users/${id}`);
+      const data = await response.json();
+  
+      const name = data.name;
+      setUserTitle(name);
+  
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    }
+  };
 
   const handleSubmit = async (event) => {
     try {

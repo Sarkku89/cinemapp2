@@ -3,10 +3,12 @@ import axios from 'axios';
 import { useUserContext } from './UserContext';
 
 
-const ScreeningModal = ({ movieId, screenings, onClose, onBookTickets}) => {
+const ScreeningModal = ({ movieId, screenings, onClose}) => {
   const modalClassName = screenings.length >= 0 ? 'screening-modal visible' : 'screening-modal';
   const user = useUserContext();
   const [modalHeader, setModalHeader] = useState('');
+  const [success, setSuccess] = useState(false);
+
  
   useEffect(() => {
     // Fetch movie details and update modal header
@@ -23,14 +25,35 @@ const ScreeningModal = ({ movieId, screenings, onClose, onBookTickets}) => {
     fetchMovieDetails();
   }, [movieId]);
 
+
   const handleBookTickets = (screening) => {
     if (!user) {
       console.error('User ID not available');
       return;
     }
-    // Pass the entire screening object to onBookTickets
-    onBookTickets(screening);   
+
+    if (!screening || !screening.id) {
+      console.error('Invalid screening object or screening_id is not defined');
+      return;
+    }
+
+    const userId = user.user.id;
+    const screeningId = screening.id;
+
+    // Send a request to book tickets
+    axios.post('http://localhost:8080/bookings', { "user": { "id": userId }, "screening": { "id": screeningId } })
+      .then(response => {
+        // Handle the response as needed
+        console.log(response.data);
+        setSuccess(true);
+      })
+      .catch(error => {
+        console.error('Error booking tickets:', error);
+        // Handle errors appropriately
+      });
   };
+
+
 
   return (
 
@@ -75,6 +98,9 @@ const ScreeningModal = ({ movieId, screenings, onClose, onBookTickets}) => {
           </div>
         ) : (
           <p id="no-screenings">No screenings at the moment!</p>
+        )}
+        {success && (
+          <p>Tickets booked successfully!</p>
         )}
 
         {/* Close button */}

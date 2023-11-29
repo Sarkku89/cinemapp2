@@ -8,6 +8,8 @@ const Profile = () => {
   const { user } = useUserContext();
   const [userTickets, setUserTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userTitle, setUserTitle] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +36,25 @@ const Profile = () => {
     fetchUserTickets();
   }, [user]);
 
+  const fetchUser = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/users/${id}`);
+      const data = await response.json();
+  
+      const name = data.name;
+      const email = data.email;
+      setUserTitle(name);
+      setUserEmail(email);
+  
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser(user.id);
+  }, [fetchUser]);
+
   const handleCancel = async (ticketId) => {
     try {
       await axios.delete(`http://localhost:8080/bookings/${ticketId}`);
@@ -55,8 +76,8 @@ const Profile = () => {
 
   return (
     <div>
-      <h2 id="h2-profile">Welcome, {user.name}!</h2>
-      <p>Email: {user.email}</p>
+      <h2 id="h2-profile">Welcome, {userTitle}!</h2>
+      <p>Email: {userEmail}</p>
       <br />
       <Link to="/updateuser"> {/* Wrap the button with Link */}
         <button className='edit-profile'>Edit profile</button>

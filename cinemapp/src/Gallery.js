@@ -48,32 +48,6 @@ const Gallery = () => {
   };
 
 
-  const handleBookTickets = (screening) => {
-    if (!user) {
-      console.error('User ID not available');
-      return;
-    }
-
-    if (!screening || !screening.id) {
-      console.error('Invalid screening object or screening_id is not defined');
-      return;
-    }
-
-    const userId = user.user.id;
-    const screeningId = screening.id;
-
-    // Send a request to book tickets
-    axios.post('http://localhost:8080/bookings', { "user": { "id": userId }, "screening": { "id": screeningId } })
-      .then(response => {
-        // Handle the response as needed
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error('Error booking tickets:', error);
-        // Handle errors appropriately
-      });
-  };
-
 
   const handleSeeScreenings = async (id) => {
     try {
@@ -139,7 +113,6 @@ const Gallery = () => {
           movieId={selectedMovieId}
           screenings={screenings}
           onClose={handleCloseModal}
-          onBookTickets={handleBookTickets}
         />
       )}
     </div>
